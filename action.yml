@@ -1,0 +1,32 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: action
+name: cbci build actions
+inputs:
+  url:
+    description: 'ansible REST-API url'
+    required: false
+    default: ''
+  token:
+    description: 'token'
+    required: false
+    default: ''
+  job_template_name:
+    description: 'job template name'
+    required: false
+    default: ''
+  workflow_job_template_name:
+    description: 'workflow job template name'
+    required: false
+    default: ''
+  
+runs:
+  using: composite
+  steps:
+    - id: invoke-ansible-actions
+      name: invoke-ansible-actions
+      uses: docker://public.ecr.aws/l7o7z1g8/actions/ansible-actions:main-36310dd687eca8ef348d16e2344c51383455288e
+      shell: sh
+      run: |
+        set -x
+        cd /app
+        ./ansible_actions_app invoke -v '{"metaInfo":{"AnsibleApiUrl":"${{ inputs.url }}","Token":"${{ inputs.token }}","JobTemplateName":"${{ inputs.job_template_name }}"}}'

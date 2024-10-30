@@ -1,0 +1,70 @@
+= CloudBees action: Invoke ansible run job
+
+Use this action to trigger ansible awx or AAP and fetch the stdout logs as output.
+
+
+== Inputs
+
+[cols="2a,1a,1a,3a",options="header"]
+.Input details
+|===
+
+| Input name
+| Data type
+| Required?
+| Description
+
+| `url`
+| String
+| Yes
+| The URL of ansible awx or AAP which has REST apis exposed.
+
+| `token`
+| String
+| Yes
+| The API token generated with proper access(Read/Write).
+
+| `job_template_name`
+| String
+| Depends
+| The name of the job template which has the playbook.
+
+| `workflow_job_template_name`
+| String
+| Depends
+| The name of the workflow job template which has the workflow configured on awx or AAP. 
+
+|===
+
+== Usage examples
+
+[source,yaml]
+----
+      - name: Trigger ansible actions
+        uses: cloudbees-io/ansible-run-job@v1
+        with:
+          # Mandatory
+          # Add the Api URL of the ansible AWX or AAP
+          url: "https://ansible.saas-qa.beescloud.com/api/controller/v2/"
+          # Mandatory
+          # Add the Api Token of the ansible AWX or AAP which is added in the Secrets
+          token: ${{ secrets.AAP_TOKEN }}
+          # Mandatory
+          #Add the job template name or workflow job template name
+          # To add job template name
+          job_template_name: "sample template"
+          # Or
+          # To add workflow job template name 
+          workflow_job_template_name: "sample template" 
+----
+
+
+== License
+
+This code is made available under the 
+link:https://opensource.org/license/mit/[MIT license].
+
+== References
+
+* Learn more about link:https://docs.cloudbees.com/docs/cloudbees-saas-platform-actions/latest/[using actions in CloudBees workflows].
+* Learn about link:https://docs.cloudbees.com/docs/cloudbees-saas-platform/latest/[the CloudBees platform].
