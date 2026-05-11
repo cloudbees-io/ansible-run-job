@@ -24,7 +24,7 @@ runs:
   steps:
     - id: invoke-ansible-actions
       name: invoke-ansible-actions
-      uses: docker://public.ecr.aws/l7o7z1g8/actions/ansible-actions:main-54c870441a3448f8bdb9881b8b69e75902f99d95
+      uses: docker://public.ecr.aws/l7o7z1g8/actions/ansible-actions:main-dfb35666be2cc74f8abdcdb72db792c10d307c19
       shell: sh
       run: |
         set -x
